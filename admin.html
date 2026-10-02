@@ -103,9 +103,10 @@ p.aide{color:var(--ink-soft);font-size:.93rem;margin-bottom:1.2rem}
 
     <section class="panel card-box" id="panel-creations" hidden>
       <h2 class="sec">Photos des créations</h2>
-      <p class="aide">Ces photos remplacent celles du carrousel de l'accueil. Le plus petit numéro d'ordre passe en premier.</p>
+      <p class="aide">Ces photos remplacent celles du carrousel de l'accueil. Le plus petit numéro d'ordre passe en premier. Sans Firebase Storage (plan gratuit), dépose la photo dans <code>assets/img/</code> sur GitHub et colle son chemin, par exemple <code>assets/img/ma-photo.jpg</code>.</p>
       <form id="creaForm" class="grid-form">
-        <label class="f">Photo<input type="file" name="photo" accept="image/*" required></label>
+        <label class="f">Lien de la photo<input name="lien" placeholder="assets/img/ma-photo.jpg ou https://…"></label>
+        <label class="f">ou fichier (Storage requis)<input type="file" name="photo" accept="image/*"></label>
         <label class="f">Description<input name="alt" placeholder="Ballon bulle 40 ans doré"></label>
         <label class="f">Ordre<input type="number" name="ordre" value="0"></label>
         <button class="btn btn-main" type="submit">Ajouter au carrousel</button>
@@ -121,7 +122,8 @@ p.aide{color:var(--ink-soft);font-size:.93rem;margin-bottom:1.2rem}
         <label class="f">Description<input name="description" placeholder="Vinyle permanent, couleur au choix"></label>
         <label class="f">Prix (XPF)<input type="number" name="prix" min="0" step="10" placeholder="1990"></label>
         <label class="f">Emoji<input name="emoji" placeholder="☕" maxlength="4"></label>
-        <label class="f">Photo (facultatif)<input type="file" name="image" accept="image/*"></label>
+        <label class="f">Lien de la photo<input name="lien" placeholder="assets/img/produit.jpg"></label>
+        <label class="f">ou fichier (Storage requis)<input type="file" name="image" accept="image/*"></label>
         <label class="f">Ordre<input type="number" name="ordre" value="0"></label>
         <button class="btn btn-main" type="submit">Ajouter le produit</button>
       </form>

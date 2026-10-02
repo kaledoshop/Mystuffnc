@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dashboard — My Stuff NC</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+
+<style>
+body{padding-bottom:4rem}
+.admin-top{display:flex;align-items:center;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--line);margin-bottom:2rem}
+.admin-top img{height:42px}
+.admin-top .who{margin-left:auto;color:var(--ink-soft);font-size:.92rem}
+.card-box{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:1.6rem;margin-bottom:1.5rem}
+.tabs-admin{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tab{border:2px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:.5rem 1.1rem;font-weight:700}
+.tab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--blush)}
+.badge{background:var(--candy);color:#fff;border-radius:999px;padding:0 .5rem;margin-left:.4rem;font-size:.8rem}
+.grid-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.9rem;align-items:end}
+label.f{display:flex;flex-direction:column;gap:.3rem;font-size:.88rem;font-weight:700;color:var(--ink-soft)}
+input,select,textarea{font:inherit;padding:.7rem .9rem;border:1px solid var(--line);border-radius:12px;background:var(--blush);color:var(--ink);width:100%}
+textarea{min-height:90px;resize:vertical}
+.row-card{display:flex;gap:1rem;justify-content:space-between;align-items:flex-start;border:1px solid var(--line);border-radius:16px;padding:1rem 1.2rem;margin-top:.8rem;background:var(--blush)}
+.row-card.neuf{border-color:var(--candy);box-shadow:0 0 0 2px rgba(238,127,178,.15)}
+.row-card.passe{opacity:.55}
+.row-card small{display:block;color:var(--ink-soft)}
+.row-card p{margin-top:.3rem;color:var(--ink-soft);font-size:.95rem}
+.acts{display:flex;gap:.5rem;flex-wrap:wrap}
+.acts button,.vignette button{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:.4rem .9rem;font-weight:700;font-size:.88rem}
+.acts .danger,.vignette .danger{border-color:#E39;color:#C2246B}
+.tagok{color:var(--ink-soft);font-size:.88rem;align-self:center}
+.vide{color:var(--ink-soft);margin-top:1rem}
+.vignettes{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1rem;margin-top:1.2rem}
+.vignette{margin:0;background:var(--blush);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.vignette img{width:100%;aspect-ratio:3/4;object-fit:cover}
+.vignette figcaption{display:grid;gap:.4rem;padding:.7rem}
+.flash{position:fixed;left:50%;bottom:1.5rem;transform:translate(-50%,180%);background:var(--ink);color:var(--blush);padding:.8rem 1.3rem;border-radius:999px;font-weight:700;transition:transform .3s;z-index:90}
+.flash.ok,.flash.ko{transform:translate(-50%,0)}
+.flash.ko{background:#C2246B}
+.login-box{max-width:420px;margin:4rem auto}
+.err{color:#C2246B;font-size:.9rem}
+h2.sec{font-size:1.5rem;margin-bottom:.4rem}
+p.aide{color:var(--ink-soft);font-size:.93rem;margin-bottom:1.2rem}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="admin-top">
+    <img src="assets/img/img01.png" alt="My Stuff">
+    <strong>Dashboard</strong>
+    <span class="who" id="who"></span>
+    <button class="tab" id="logout" hidden>Déconnexion</button>
+  </div>
+
+  <section class="card-box" id="setup" hidden>
+    <h2 class="sec">Firebase n'est pas encore configuré</h2>
+    <p class="aide">Ouvre le fichier <code>assets/firebase-config.js</code> et colle la configuration de ton projet Firebase à la place des <code>A_REMPLIR</code>. Les étapes détaillées sont dans le README.</p>
+  </section>
+
+  <section class="card-box login-box" id="login">
+    <h2 class="sec">Connexion</h2>
+    <p class="aide">Réservé à My Stuff. Le compte se crée dans Firebase, onglet Authentication.</p>
+    <form id="loginForm" class="grid-form" style="grid-template-columns:1fr">
+      <label class="f">E-mail<input type="email" name="email" required autocomplete="username"></label>
+      <label class="f">Mot de passe<input type="password" name="pw" required autocomplete="current-password"></label>
+      <button class="btn btn-main" type="submit">Se connecter</button>
+      <p class="err" id="loginErr"></p>
+    </form>
+  </section>
+
+  <div id="app" hidden>
+    <div class="tabs-admin" role="tablist">
+      <button class="tab" data-panel="demandes" aria-selected="true">Demandes <span class="badge" id="nbDemandes">0</span></button>
+      <button class="tab" data-panel="reservations" aria-selected="false">Photocall</button>
+      <button class="tab" data-panel="creations" aria-selected="false">Créations</button>
+      <button class="tab" data-panel="produits" aria-selected="false">Catalogue</button>
+      <button class="tab" data-panel="textes" aria-selected="false">Textes</button>
+    </div>
+
+    <section class="panel card-box" id="panel-demandes">
+      <h2 class="sec">Demandes reçues</h2>
+      <p class="aide">Chaque devis ou demande envoyé depuis le site arrive ici, même si le client n'a pas fini sur Messenger.</p>
+      <div id="demandes"></div>
+    </section>
+
+    <section class="panel card-box" id="panel-reservations" hidden>
+      <h2 class="sec">Dates du photocall</h2>
+      <p class="aide">Bloque une date : elle sera refusée dans le formulaire du site.</p>
+      <form id="resaForm" class="grid-form">
+        <label class="f">Date<input type="date" name="date" required></label>
+        <label class="f">Événement<input name="evenement" placeholder="Anniversaire, mariage…"></label>
+        <label class="f">Client<input name="client" placeholder="Nom (facultatif)"></label>
+        <label class="f">Note<input name="note" placeholder="Acompte reçu, lieu…"></label>
+        <button class="btn btn-main" type="submit">Bloquer la date</button>
+      </form>
+      <div id="reservations"></div>
+    </section>
+
+    <section class="panel card-box" id="panel-creations" hidden>
+      <h2 class="sec">Photos des créations</h2>
+      <p class="aide">Ces photos remplacent celles du carrousel de l'accueil. Le plus petit numéro d'ordre passe en premier.</p>
+      <form id="creaForm" class="grid-form">
+        <label class="f">Photo<input type="file" name="photo" accept="image/*" required></label>
+        <label class="f">Description<input name="alt" placeholder="Ballon bulle 40 ans doré"></label>
+        <label class="f">Ordre<input type="number" name="ordre" value="0"></label>
+        <button class="btn btn-main" type="submit">Ajouter au carrousel</button>
+      </form>
+      <div class="vignettes" id="creations"></div>
+    </section>
+
+    <section class="panel card-box" id="panel-produits" hidden>
+      <h2 class="sec">Catalogue</h2>
+      <p class="aide">Les produits visibles s'affichent sur la page Boutique, avec leur prix en XPF.</p>
+      <form id="prodForm" class="grid-form">
+        <label class="f">Nom<input name="nom" required placeholder="Mug prénom personnalisé"></label>
+        <label class="f">Description<input name="description" placeholder="Vinyle permanent, couleur au choix"></label>
+        <label class="f">Prix (XPF)<input type="number" name="prix" min="0" step="10" placeholder="1990"></label>
+        <label class="f">Emoji<input name="emoji" placeholder="☕" maxlength="4"></label>
+        <label class="f">Photo (facultatif)<input type="file" name="image" accept="image/*"></label>
+        <label class="f">Ordre<input type="number" name="ordre" value="0"></label>
+        <button class="btn btn-main" type="submit">Ajouter le produit</button>
+      </form>
+      <div id="produits"></div>
+    </section>
+
+    <section class="panel card-box" id="panel-textes" hidden>
+      <h2 class="sec">Textes du site</h2>
+      <p class="aide">Laisse un champ vide pour garder le texte d'origine.</p>
+      <form id="texteForm" class="grid-form" style="grid-template-columns:1fr">
+        <label class="f">Titre de l'accueil<input name="heroTitre" placeholder="Un peu de tout, beaucoup de rose."></label>
+        <label class="f">Sous-titre de l'accueil<textarea name="heroTexte"></textarea></label>
+        <label class="f">Texte du photocall<textarea name="photocallTexte"></textarea></label>
+        <label class="f">Tarif du photocall<input name="photocallTarif" placeholder="Sur devis"></label>
+        <label class="f">Texte du vinyle<textarea name="vinyleTexte"></textarea></label>
+        <label class="f">Texte des box cadeaux<textarea name="boxTexte"></textarea></label>
+        <label class="f">Texte du contact<textarea name="contactTexte"></textarea></label>
+        <button class="btn btn-main" type="submit">Enregistrer les textes</button>
+      </form>
+    </section>
+  </div>
+</div>
+
+<div class="flash" id="flash"></div>
+<script type="module" src="assets/admin.js"></script>
+</body>
+</html>

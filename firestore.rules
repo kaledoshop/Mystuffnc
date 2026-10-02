@@ -1,0 +1,18 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Contenu public : tout le monde peut lire, seul un compte connecté peut modifier
+    match /site/{doc}        { allow read: if true;  allow write: if request.auth != null; }
+    match /creations/{doc}   { allow read: if true;  allow write: if request.auth != null; }
+    match /produits/{doc}    { allow read: if true;  allow write: if request.auth != null; }
+    match /reservations/{doc}{ allow read: if true;  allow write: if request.auth != null; }
+
+    // Demandes : le site peut en créer une, seul l'admin peut les lire et les gérer
+    match /demandes/{doc} {
+      allow create: if request.resource.data.keys().hasOnly(['type','date','evenement','message','nom','contact','statut','cree'])
+                    && request.resource.data.statut == 'nouveau';
+      allow read, update, delete: if request.auth != null;
+    }
+  }
+}

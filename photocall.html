@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Photocall style Vogue — My Stuff NC</title>
+<meta name="description" content="My Stuff, la boutique où tu trouves de tout à Nouméa : location de photocall style Vogue, personnalisation vinyle, box cadeaux et compositions de ballons.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="bubbles" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="My Stuff, retour à l'accueil"><img src="assets/img/img01.png" alt="My Stuff"></a>
+    <nav class="nav" id="nav" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="boutique.html">Boutique</a>
+      <a href="photocall.html" aria-current="page">Photocall</a>
+      <a href="vinyle.html">Vinyle</a>
+      <a href="box.html">Box cadeaux</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <a class="cart-btn" href="https://m.me/mystuffnc" target="_blank" rel="noopener" style="text-decoration:none">💬 <span class="lbl">Nous écrire</span></a>
+  </div>
+</header>
+
+<main>
+<section class="block photocall" aria-labelledby="pc-title">
+    <div class="wrap">
+      <img class="cover-photo" src="assets/img/img07.jpg" alt="Invités posant dans le photocall Vogue pour un anniversaire de 18 ans, devant des ballons dorés" loading="lazy" decoding="async">
+      <div class="pc-copy">
+        <h2 id="pc-title">Ta fête, en couverture.</h2>
+        <p data-cms="photocallTexte">Une box photocall en plexi façon magazine de mode, pour des photos que tes invités vont vraiment poster.</p>
+        <dl class="facts">
+          <div><dt>Format</dt><dd>2 × 1,50 m</dd></div>
+          <div><dt>Matière</dt><dd>Plexi</dd></div>
+          <div><dt>Tarif</dt><dd data-cms="photocallTarif">Sur devis</dd></div>
+        </dl>
+        <form class="form" id="pcForm">
+          <label>Date de l'événement<input type="date" name="date" required></label>
+          <p class="full pc-legal" id="dateNote"></p>
+          <label>Type d'événement
+            <select name="type">
+              <option>Anniversaire</option><option>Mariage</option><option>Baby shower</option><option>Soirée d'entreprise</option><option>Autre</option>
+            </select>
+          </label>
+          <button class="btn btn-main full" type="submit">Demander un devis sur Messenger</button>
+          <p class="full pc-legal">Location soumise à nos <button class="inline-link" data-open="cgv">conditions de vente</button> (acompte et dépôt de garantie).</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 My Stuff — Nouméa, Nouvelle-Calédonie. Prix en XPF, TGC incluse.</span>
+    <span class="legal-links"><button data-open="cgv">Conditions de vente</button><button data-open="mentions">Mentions légales</button></span>
+  </div>
+</footer>
+
+<dialog class="legal" id="cgv" aria-labelledby="cgv-title">
+  <div class="legal-head"><h2 id="cgv-title">Conditions générales de vente</h2><button class="x" data-close aria-label="Fermer">✕</button></div>
+  <div class="legal-body">
+    <p class="upd">Dernière mise à jour : <mark class="todo">[à compléter : date]</mark></p>
+
+    <h3>1. Qui sommes-nous</h3>
+    <p>Les présentes conditions s'appliquent à toutes les ventes et prestations de My Stuff, <mark class="todo">[à compléter : nom ou raison sociale]</mark>, immatriculée au RIDET sous le numéro <mark class="todo">[à compléter : n° RIDET]</mark>, dont le siège est situé <mark class="todo">[à compléter : adresse]</mark>, Nouvelle-Calédonie. Contact : <mark class="todo">[à compléter : e-mail]</mark>, <mark class="todo">[à compléter : téléphone]</mark>, ou via Messenger.</p>
+
+    <h3>2. Produits et services</h3>
+    <p>My Stuff propose la vente d'articles (cadeaux, décoration, articles de fête), la personnalisation d'objets au vinyle, la confection de box cadeaux et la location d'un photocall. Les photos du site sont non contractuelles : les articles personnalisés et les compositions de ballons peuvent varier légèrement selon les disponibilités.</p>
+
+    <h3>3. Prix</h3>
+    <p>Les prix sont indiqués en francs CFP (XPF), toutes taxes comprises (TGC incluse). Les prestations sur mesure (personnalisation, box, photocall) font l'objet d'un devis. My Stuff peut modifier ses prix à tout moment ; le prix applicable est celui confirmé au moment de la commande.</p>
+
+    <h3>4. Commande</h3>
+    <p>Les commandes et demandes de devis se font par Messenger, directement ou via les boutons du site. La commande devient ferme lorsque My Stuff l'a confirmée par écrit (disponibilité, prix total, date de retrait ou de livraison) et que le paiement ou l'acompte a été reçu.</p>
+
+    <h3>5. Paiement</h3>
+    <p>Moyens de paiement acceptés : <mark class="todo">[à compléter : espèces, virement, carte…]</mark>. Pour les articles personnalisés et les box, un acompte de <mark class="todo">[à compléter : ex. 50 %]</mark> est demandé à la commande, le solde étant réglé au retrait ou à la livraison.</p>
+
+    <h3>6. Retrait et livraison</h3>
+    <p>Les commandes sont à retirer <mark class="todo">[à compléter : lieu et horaires de retrait]</mark>. Une livraison peut être proposée dans le Grand Nouméa <mark class="todo">[à compléter : zones et tarif]</mark>. Les délais indiqués sont donnés à titre indicatif ; en cas de retard important, le client peut annuler sa commande et être remboursé.</p>
+
+    <h3>7. Droit de rétractation</h3>
+    <p>Pour un achat à distance, le client dispose de 15 jours francs à compter de la réception de sa commande pour retourner un article, en bon état et dans son emballage d'origine, en vue d'un échange ou d'un remboursement. Les frais de retour sont à sa charge. My Stuff rembourse les sommes versées au plus tard dans les 30 jours suivant l'exercice de ce droit.</p>
+    <p>Ce droit ne s'applique pas, conformément à la réglementation calédonienne, aux articles confectionnés selon les demandes du client ou nettement personnalisés (vinyle, prénoms, box composées sur mesure), ni aux produits susceptibles de se détériorer ou de se périmer rapidement (bonbons, ballons gonflés). Il ne concerne pas non plus les achats effectués directement en boutique.</p>
+
+    <h3>8. Personnalisation</h3>
+    <p>Avant toute réalisation, My Stuff soumet une maquette au client. Une fois la maquette validée, le client est responsable du texte (orthographe, dates, prénoms) et aucune réclamation ne pourra porter sur ces éléments. Le client garantit disposer des droits sur les logos, images ou textes qu'il fournit ; My Stuff peut refuser toute demande contraire à la loi ou aux bonnes mœurs.</p>
+
+    <h3>9. Location du photocall</h3>
+    <p>La réservation est confirmée à réception d'un acompte de <mark class="todo">[à compléter : montant]</mark>. Un dépôt de garantie de <mark class="todo">[à compléter : montant]</mark> est demandé à la remise du photocall et restitué après vérification de son état. Le locataire est responsable du matériel pendant toute la durée de la location : toute casse, rayure ou perte sera facturée au coût de réparation ou de remplacement. Conditions d'annulation : <mark class="todo">[à compléter : ex. acompte conservé en cas d'annulation moins de X jours avant la date]</mark>. Retrait, installation et retour : <mark class="todo">[à compléter : modalités]</mark>.</p>
+
+    <h3>10. Garanties</h3>
+    <p>Les articles vendus bénéficient de la garantie légale de conformité et de la garantie contre les vices cachés. En cas d'article défectueux ou non conforme, le client contacte My Stuff pour obtenir un échange, une réparation ou un remboursement.</p>
+
+    <h3>11. Réclamations et litiges</h3>
+    <p>Toute réclamation peut être adressée à My Stuff par Messenger ou à <mark class="todo">[à compléter : e-mail]</mark>. Les présentes conditions sont soumises au droit applicable en Nouvelle-Calédonie. À défaut d'accord amiable, le litige sera porté devant les juridictions compétentes de Nouméa.</p>
+  </div>
+</dialog><dialog class="legal" id="mentions" aria-labelledby="ml-title">
+  <div class="legal-head"><h2 id="ml-title">Mentions légales</h2><button class="x" data-close aria-label="Fermer">✕</button></div>
+  <div class="legal-body">
+    <h3>Éditeur du site</h3>
+    <p>My Stuff, <mark class="todo">[à compléter : nom ou raison sociale, forme juridique (entreprise individuelle, SARL…)]</mark><br>
+    RIDET : <mark class="todo">[à compléter : n° RIDET]</mark><br>
+    Adresse : <mark class="todo">[à compléter : adresse]</mark>, Nouvelle-Calédonie<br>
+    Contact : <mark class="todo">[à compléter : e-mail]</mark>, <mark class="todo">[à compléter : téléphone]</mark><br>
+    Directeur ou directrice de la publication : <mark class="todo">[à compléter : nom]</mark></p>
+
+    <h3>Hébergement</h3>
+    <p><mark class="todo">[à compléter : nom, adresse et contact de l'hébergeur (ex. GitHub Inc. si le site est sur GitHub Pages)]</mark></p>
+
+    <h3>Propriété intellectuelle</h3>
+    <p>Le logo, les textes et les photos de ce site appartiennent à My Stuff ou sont utilisés avec l'accord de leurs auteurs. Toute reproduction sans autorisation est interdite.</p>
+
+    <h3>Données personnelles</h3>
+    <p>Ce site ne comporte pas de compte client et n'enregistre pas de données sur un serveur. Il n'utilise pas de formulaire enregistré : les boutons de demande préparent simplement un message que tu envoies toi-même sur Messenger.</p>
+    <p>Les informations que tu nous envoies par Messenger (nom, commande, date d'événement) servent uniquement à traiter ta demande et ne sont jamais revendues. Les échanges sur Messenger sont aussi soumis à la politique de confidentialité de Meta. Conformément à la loi Informatique et Libertés, tu peux demander l'accès, la rectification ou la suppression de tes données en nous écrivant à <mark class="todo">[à compléter : e-mail]</mark>, et saisir la CNIL si tu estimes que tes droits ne sont pas respectés.</p>
+
+    <h3>Cookies</h3>
+    <p>Le site n'utilise ni cookie publicitaire ni outil de mesure d'audience. Les polices d'écriture sont chargées depuis Google Fonts.</p>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="assets/app.js"></script>
+<script src="assets/contenu.js"></script>
+<script type="module" src="assets/site-data.js"></script>
+</body>
+</html>

@@ -9,6 +9,15 @@ import { ref, uploadBytes, getDownloadURL, deleteObject }
 const $ = s => document.querySelector(s);
 const esc = t => String(t ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const fmt = n => Number(n || 0).toLocaleString("fr-FR").replace(/\u202f|\u00a0/g, " ") + " XPF";
+
+const lienContact = c => {
+  const v = String(c || "").trim();
+  if (!v) return "";
+  if (v.includes("@")) return `<a class="lien" href="mailto:${v}">Répondre par e-mail</a>`;
+  const tel = v.replace(/[^\d+]/g, "");
+  if (tel.length >= 6) return `<a class="lien" href="tel:${tel}">Appeler</a> <a class="lien" href="sms:${tel}">SMS</a>`;
+  return "";
+};
 const dateFR = d => d ? new Date(d).toLocaleDateString("fr-FR") : "";
 let msgTimer;
 function flash(txt, ok = true) {
@@ -43,8 +52,39 @@ document.querySelectorAll(".tab").forEach(t => t.onclick = () => {
 });
 
 function chargerTout() {
-  chargerDemandes(); chargerReservations(); chargerCreations(); chargerProduits(); chargerTextes();
+  chargerCommandes(); chargerDemandes(); chargerReservations(); chargerCreations(); chargerProduits(); chargerTextes();
 }
+
+
+// ── Commandes ────────────────────────────────────────────────
+const SUITE = { nouveau: "en_cours", en_cours: "prete", prete: "terminee" };
+const LIBELLE = { nouveau: "nouvelle", en_cours: "en préparation", prete: "prête", terminee: "terminée" };
+const SUIVANT = { nouveau: "Je prépare", en_cours: "C'est prêt", prete: "Remise au client" };
+
+async function chargerCommandes() {
+  const snap = await getDocs(query(collection(db, "commandes"), orderBy("cree", "desc")));
+  const rows = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  $("#nbCommandes").textContent = rows.filter(r => r.statut !== "terminee").length;
+  $("#commandes").innerHTML = rows.length ? rows.map(r => `
+    <article class="row-card ${r.statut === "nouveau" ? "neuf" : ""} ${r.statut === "terminee" ? "passe" : ""}">
+      <div>
+        <b>${esc(r.nom)}</b> · ${fmt(r.total)} · <i>${LIBELLE[r.statut] || r.statut}</i>
+        <small>${r.cree?.toDate ? r.cree.toDate().toLocaleString("fr-FR") : ""} · ${esc(r.retrait || "")}</small>
+        <ul class="articles">${(r.articles || []).map(a => `<li>${a.qte} × ${esc(a.nom)}${a.prix ? ` — ${fmt(a.prix * a.qte)}` : ""}</li>`).join("")}</ul>
+        ${r.message ? `<p>${esc(r.message)}</p>` : ""}
+        <p>${esc(r.contact)} ${lienContact(r.contact)}</p>
+      </div>
+      <div class="acts">
+        ${SUITE[r.statut] ? `<button data-suite="${r.id}" data-vers="${SUITE[r.statut]}">${SUIVANT[r.statut]}</button>` : ""}
+        <button class="danger" data-suppr-cmd="${r.id}">Supprimer</button>
+      </div>
+    </article>`).join("") : `<p class="vide">Aucune commande pour l'instant.</p>`;
+}
+$("#commandes").addEventListener("click", async e => {
+  const s = e.target.dataset.suite, d = e.target.dataset.supprCmd;
+  if (s) { await updateDoc(doc(db, "commandes", s), { statut: e.target.dataset.vers }); chargerCommandes(); }
+  if (d && confirm("Supprimer cette commande ?")) { await deleteDoc(doc(db, "commandes", d)); chargerCommandes(); }
+});
 
 // ── Demandes ────────────────────────────────────────────────
 async function chargerDemandes() {
@@ -58,6 +98,7 @@ async function chargerDemandes() {
         ${r.date ? ` · ${dateFR(r.date)}` : ""} ${r.evenement ? ` · ${esc(r.evenement)}` : ""}
         <small>${r.cree?.toDate ? r.cree.toDate().toLocaleString("fr-FR") : ""}</small>
         ${r.message ? `<p>${esc(r.message)}</p>` : ""}
+        ${r.nom || r.contact ? `<p>${esc(r.nom || "")} ${esc(r.contact || "")} ${lienContact(r.contact)}</p>` : ""}
       </div>
       <div class="acts">
         ${r.statut === "nouveau" ? `<button data-traite="${r.id}">Marquer traité</button>` : `<span class="tagok">traité</span>`}

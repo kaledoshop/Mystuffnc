@@ -25,7 +25,7 @@
       <a href="contact.html">Contact</a>
     </nav>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
-    <a class="cart-btn" href="https://m.me/mystuffnc" target="_blank" rel="noopener" style="text-decoration:none">💬 <span class="lbl">Nous écrire</span></a>
+    <button class="cart-btn" id="cartBtn" aria-label="Ouvrir le panier">🛍️ <span class="lbl">Panier</span> <span class="cart-count" id="cartCount">0</span></button>
   </div>
 </header>
 
@@ -112,9 +112,34 @@
   </div>
 </dialog>
 
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Panier" aria-hidden="true">
+  <header><h2>Ton panier</h2><button class="x" id="fermerPanier" aria-label="Fermer le panier">✕</button></header>
+  <div class="items" id="items"></div>
+  <footer>
+    <div class="total"><span>Total</span><span id="total">0 XPF</span></div>
+    <form id="commandeForm" class="form-panier">
+      <label>Ton nom<input name="nom" required placeholder="Prénom et nom"></label>
+      <label>Téléphone ou e-mail<input name="contact" required placeholder="Pour qu'on te recontacte"></label>
+      <label>Retrait ou livraison
+        <select name="retrait">
+          <option>Retrait en boutique</option>
+          <option>Livraison dans le Grand Nouméa</option>
+          <option>À voir ensemble</option>
+        </select>
+      </label>
+      <label>Message (facultatif)<textarea name="message" rows="2" placeholder="Date souhaitée, personnalisation…"></textarea></label>
+      <button class="btn btn-main" id="envoyer" type="submit">Envoyer la commande</button>
+    </form>
+    <p class="note">En commandant, tu acceptes nos <button class="inline-link" data-open="cgv">conditions de vente</button>. Le paiement se fait au retrait ou à la livraison.</p>
+  </footer>
+</aside>
+
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="assets/app.js"></script>
 <script src="assets/contenu.js"></script>
 <script type="module" src="assets/site-data.js"></script>
+<script type="module" src="assets/panier.js"></script>
 </body>
 </html>

@@ -39,7 +39,7 @@
         ${p.description ? `<p class="desc">${esc(p.description)}</p>` : ""}
         <div class="row">
           <span class="price">${p.prix ? fmt(p.prix) : "Sur devis"}</span>
-          <button class="add" data-msg="Bonjour My Stuff ! Je suis intéressé(e) par : ${esc(p.nom)}.">Demander</button>
+          <button class="add" data-nom="${esc(p.nom)}" data-prix="${p.prix || 0}" data-emoji="${esc(p.emoji || "🎁")}">Ajouter</button>
         </div>
       </article>`).join("") : `<p class="empty">Le catalogue arrive bientôt. En attendant, écris-nous sur Messenger 🫧</p>`;
   }

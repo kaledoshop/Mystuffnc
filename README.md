@@ -60,7 +60,9 @@ Le dashboard est la page `admin.html`. Sans Firebase, le site fonctionne quand m
 
 ### Ce que fait le dashboard
 
-- **Demandes** : chaque devis photocall ou demande envoyée depuis le site est enregistrée, même si le client n'a pas terminé sur Messenger. Bouton pour marquer traité.
+- **Commandes** : le panier de la page Boutique envoie la commande directement sur le site (nom, contact, retrait ou livraison, message). Elle arrive dans cet onglet, avec un suivi : nouvelle → en préparation → prête → terminée, et un bouton pour rappeler ou écrire au client.
+
+- **Messages** : le formulaire de contact et les demandes de devis photocall arrivent ici, avec un lien direct pour répondre par e-mail, appel ou SMS. Bouton pour marquer traité.
 - **Photocall** : bloquer une date. Le formulaire du site refuse alors cette date.
 - **Créations** : ajouter, décrire, ordonner ou supprimer les photos du carrousel de l'accueil. Tant qu'aucune photo n'est ajoutée, le site garde celles d'origine.
 - **Catalogue** : ajouter des produits avec prix en XPF, photo, emoji ; les masquer ou les supprimer. Ils s'affichent sur la page Boutique.
@@ -89,3 +91,11 @@ Bon à savoir :
 - Cette version ne peut pas recevoir les demandes de devis : sans base de données, il n'y a rien pour les enregistrer. Elles continuent d'arriver sur Messenger.
 - Si `admin-local.html` est en ligne, n'importe qui connaissant l'adresse peut l'ouvrir. Ce n'est pas grave : la page ne contient aucune donnée client et personne ne peut modifier le site depuis là, puisque la mise en ligne passe par un dépôt GitHub protégé par ton compte. Pour être tranquille, tu peux aussi ne pas mettre ce fichier en ligne et l'ouvrir uniquement depuis ton ordinateur.
 - Si les deux dashboards sont utilisés, Firebase prend le dessus sur `contenu.json`. Mieux vaut choisir l'un ou l'autre.
+
+### Panier et commandes
+
+La page Boutique a un panier : le client ajoute des articles, ouvre le panier, remplit nom, contact, retrait ou livraison, et envoie. La commande part dans Firestore et s'affiche dans le dashboard. Le paiement se fait au retrait ou à la livraison, il n'y a pas de paiement en ligne (et c'est ce qui permet de rester sur GitHub Pages).
+
+Si Firebase n'est pas configuré, le panier fonctionne quand même : au moment de l'envoi, le récapitulatif est copié et Messenger s'ouvre, comme avant.
+
+Pense à republier `firestore.rules` après cette mise à jour : la collection `commandes` y a été ajoutée.

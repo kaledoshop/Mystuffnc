@@ -4,6 +4,7 @@ import { db, firebaseReady } from "./fb.js";
 import { collection, doc, getDoc, getDocs, addDoc, query, where, orderBy, serverTimestamp }
   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+const escAttr = t => String(t ?? "").replace(/"/g, "&quot;");
 const fmt = n => Number(n).toLocaleString("fr-FR").replace(/\u202f|\u00a0/g, " ") + " XPF";
 
 async function loadTextes() {
@@ -43,7 +44,7 @@ async function loadCatalogue() {
       ${p.description ? `<p class="desc">${p.description}</p>` : ""}
       <div class="row">
         <span class="price">${p.prix ? fmt(p.prix) : "Sur devis"}</span>
-        <button class="add" data-msg="Bonjour My Stuff ! Je suis intéressé(e) par : ${p.nom}.">Demander</button>
+        <button class="add" data-nom="${escAttr(p.nom)}" data-prix="${p.prix || 0}" data-emoji="${p.emoji || "🎁"}">Ajouter</button>
       </div>
     </article>`).join("");
 }

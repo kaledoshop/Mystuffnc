@@ -45,6 +45,8 @@ textarea{min-height:90px;resize:vertical}
 .err{color:#C2246B;font-size:.9rem}
 h2.sec{font-size:1.5rem;margin-bottom:.4rem}
 p.aide{color:var(--ink-soft);font-size:.93rem;margin-bottom:1.2rem}
+.articles{margin:.4rem 0 0;padding-left:1.1rem;color:var(--ink-soft);font-size:.93rem}
+.lien{color:var(--candy-deep);font-weight:700;margin-left:.4rem}
 </style>
 </head>
 <body>
@@ -75,16 +77,23 @@ p.aide{color:var(--ink-soft);font-size:.93rem;margin-bottom:1.2rem}
 
   <div id="app" hidden>
     <div class="tabs-admin" role="tablist">
-      <button class="tab" data-panel="demandes" aria-selected="true">Demandes <span class="badge" id="nbDemandes">0</span></button>
+      <button class="tab" data-panel="commandes" aria-selected="true">Commandes <span class="badge" id="nbCommandes">0</span></button>
+      <button class="tab" data-panel="demandes" aria-selected="false">Messages <span class="badge" id="nbDemandes">0</span></button>
       <button class="tab" data-panel="reservations" aria-selected="false">Photocall</button>
       <button class="tab" data-panel="creations" aria-selected="false">Créations</button>
       <button class="tab" data-panel="produits" aria-selected="false">Catalogue</button>
       <button class="tab" data-panel="textes" aria-selected="false">Textes</button>
     </div>
 
-    <section class="panel card-box" id="panel-demandes">
-      <h2 class="sec">Demandes reçues</h2>
-      <p class="aide">Chaque devis ou demande envoyé depuis le site arrive ici, même si le client n'a pas fini sur Messenger.</p>
+    <section class="panel card-box" id="panel-commandes">
+      <h2 class="sec">Commandes</h2>
+      <p class="aide">Les commandes passées depuis la boutique arrivent ici. Fais-les avancer : je prépare, c'est prêt, remise au client.</p>
+      <div id="commandes"></div>
+    </section>
+
+    <section class="panel card-box" id="panel-demandes" hidden>
+      <h2 class="sec">Messages et demandes</h2>
+      <p class="aide">Messages du formulaire de contact et demandes de devis. Le bouton à côté du contact ouvre directement l'e-mail, l'appel ou le SMS.</p>
       <div id="demandes"></div>
     </section>
 

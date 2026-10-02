@@ -34,6 +34,13 @@
     <div class="wrap">
       <h2 id="contact-title">Une question, une idée ?</h2>
       <p data-cms="contactTexte">Écris-nous sur Facebook ou Messenger, on te répond vite. Basés à Nouméa, Nouvelle-Calédonie.</p>
+
+      <form id="msgForm" class="form-contact">
+        <label>Ton nom<input name="nom" required placeholder="Prénom et nom"></label>
+        <label>Téléphone ou e-mail<input name="contact" required placeholder="Pour qu'on te réponde"></label>
+        <label class="full">Ton message<textarea name="message" rows="4" required placeholder="Ta demande, une date, une idée…"></textarea></label>
+        <button class="btn btn-main full" type="submit">Envoyer le message</button>
+      </form>
       <div class="cta-row">
         <a class="btn btn-main" href="https://m.me/mystuffnc" target="_blank" rel="noopener">Écrire sur Messenger</a>
         <a class="btn btn-ghost" href="https://www.facebook.com/mystuffnc/" target="_blank" rel="noopener">Voir la page Facebook</a>
@@ -117,5 +124,6 @@
 <script src="assets/app.js"></script>
 <script src="assets/contenu.js"></script>
 <script type="module" src="assets/site-data.js"></script>
+<script type="module" src="assets/panier.js"></script>
 </body>
 </html>

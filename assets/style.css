@@ -264,6 +264,16 @@ mark.todo{background:#FFE7A3;color:#5a3a00;padding:0 .25rem;border-radius:4px}
 .octobre-photos img{width:100%;border-radius:22px;box-shadow:var(--shadow)}
 @media (max-width:900px){.octobre-grid{grid-template-columns:1fr;gap:2rem}}
 
+
+/* ── Panier et formulaires ── */
+.form-panier{display:grid;gap:.6rem;margin-top:.6rem}
+.form-panier label,.form-contact label{display:flex;flex-direction:column;gap:.25rem;font-size:.85rem;font-weight:600;color:var(--ink-soft)}
+.form-panier input,.form-panier select,.form-panier textarea,.form-contact input,.form-contact textarea{font:inherit;padding:.6rem .8rem;border:1px solid var(--line);border-radius:12px;background:var(--blush);color:var(--ink);width:100%}
+.form-contact{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;max-width:560px;margin:2rem auto 1.5rem;text-align:left}
+.form-contact .full{grid-column:1/-1}
+.form-contact button{width:100%}
+@media (max-width:560px){.form-contact{grid-template-columns:1fr}}
+
 /* ── Responsive ── */
 @media (max-width:900px){
   .nav{display:none;position:absolute;top:72px;left:0;right:0;background:var(--paper);flex-direction:column;padding:1rem 1.25rem;border-bottom:1px solid var(--line);gap:.9rem}

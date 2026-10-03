@@ -1,0 +1,62 @@
+{
+  "textes": {},
+  "creations": [],
+  "produits": [
+    {
+      "nom": "Casquette enfant personnalisée",
+      "description": "Toile ou tissu fourni, large choix de coloris",
+      "prix": 2500,
+      "emoji": "🧢",
+      "actif": true,
+      "image": "assets/img/prod-casquette-enfant.jpg"
+    },
+    {
+      "nom": "Bonnet ou casquette adulte",
+      "description": "Toile ou tissu fourni, large choix de coloris",
+      "prix": 2900,
+      "emoji": "🧢",
+      "actif": true,
+      "image": "assets/img/prod-casquette-adulte.jpg"
+    },
+    {
+      "nom": "Supplément stickers",
+      "description": "À ajouter à une casquette ou un bonnet",
+      "prix": 600,
+      "emoji": "✨",
+      "actif": true,
+      "image": "assets/img/prod-stickers.jpg"
+    },
+    {
+      "nom": "Supplément écussons",
+      "description": "Écusson brodé posé sur la casquette",
+      "prix": 600,
+      "emoji": "🎀",
+      "actif": true,
+      "image": "assets/img/prod-ecussons.jpg"
+    },
+    {
+      "nom": "Bouquet de ballon sur tige",
+      "description": "Ballon transparent 20 cm, message personnalisé inclus",
+      "prix": 2900,
+      "emoji": "🎈",
+      "actif": true,
+      "image": "assets/img/prod-bouquet.jpg"
+    },
+    {
+      "nom": "Mini lumières LED",
+      "description": "À glisser dans le ballon",
+      "prix": 600,
+      "emoji": "💡",
+      "actif": true,
+      "image": "assets/img/prod-led.jpg"
+    },
+    {
+      "nom": "Livraison sur le lieu de travail",
+      "description": "Grand Nouméa",
+      "prix": 1000,
+      "emoji": "🚗",
+      "actif": true
+    }
+  ],
+  "datesPrises": []
+}

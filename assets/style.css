@@ -274,6 +274,8 @@ mark.todo{background:#FFE7A3;color:#5a3a00;padding:0 .25rem;border-radius:4px}
 .form-contact button{width:100%}
 @media (max-width:560px){.form-contact{grid-template-columns:1fr}}
 
+
+
 /* ── Responsive ── */
 @media (max-width:900px){
   .nav{display:none;position:absolute;top:72px;left:0;right:0;background:var(--paper);flex-direction:column;padding:1rem 1.25rem;border-bottom:1px solid var(--line);gap:.9rem}
